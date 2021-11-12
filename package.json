@@ -4,10 +4,18 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build"
+    "build-dev": "vue-cli-service build --mode dev",
+    "build-stage": "vue-cli-service build --mode stage",
+    "build-prod": "vue-cli-service build --mode prod"
   },
   "dependencies": {
+    "@element-plus/icons": "0.0.11",
+    "axios": "^0.24.0",
     "core-js": "^3.6.5",
+    "element-plus": "^1.2.0-beta.3",
+    "js-cookie": "^3.0.1",
+    "js-md5": "^0.7.3",
+    "pug-plain-loader": "^1.1.0",
     "vue": "^3.0.0",
     "vue-router": "^4.0.0-0",
     "vuex": "^4.0.0-0"
@@ -18,7 +26,13 @@
     "@vue/cli-plugin-vuex": "~4.5.0",
     "@vue/cli-service": "~4.5.0",
     "@vue/compiler-sfc": "^3.0.0",
+    "brotli-webpack-plugin": "^1.1.0",
     "less": "^3.0.4",
-    "less-loader": "^5.0.0"
+    "less-loader": "^5.0.0",
+    "pug": "^3.0.2",
+    "pug-html-loader": "^1.1.5",
+    "pug-plain-loader": "^1.1.0",
+    "stylus": "^0.55.0",
+    "stylus-loader": "^3.0.2"
   }
 }
