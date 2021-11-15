@@ -3,7 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
+    "serve": "vue-cli-service serve  --mode dev",
+    "stage": "vue-cli-service serve  --mode stage",
+    "prod": "vue-cli-service serve  --mode prod",
     "build-dev": "vue-cli-service build --mode dev",
     "build-stage": "vue-cli-service build --mode stage",
     "build-prod": "vue-cli-service build --mode prod"
@@ -15,6 +17,7 @@
     "element-plus": "^1.2.0-beta.3",
     "js-cookie": "^3.0.1",
     "js-md5": "^0.7.3",
+    "nprogress": "^0.2.0",
     "pug-plain-loader": "^1.1.0",
     "vue": "^3.0.0",
     "vue-router": "^4.0.0-0",

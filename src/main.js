@@ -1,6 +1,7 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
+import Vuex from 'vuex'
 import store from './store'
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
@@ -12,18 +13,16 @@ import * as ElIconModules from '@element-plus/icons'
 // for(let iconName in ElIconModules){
 //     app.component(transElIconName(iconName),ElIconModules[iconName])
 // }
-for (const iconName in ElIconModules) {
+import '@styl/app.styl'
+let creatApps = createApp(App)
+creatApps.use(ElementPlus)
+creatApps.use(Vuex)
+creatApps.use(store)
+creatApps.use(router)
+creatApps.mount('#app')
+for ( let iconName in ElIconModules) {
     if (Reflect.has(ElIconModules, iconName)) {
-        const item = ElIconModules[iconName];
-        App.component(iconName, item)
+         creatApps.component(iconName,ElIconModules[iconName])
     }
 }
- 
-// import '@/views/login.vue'
-import '@styl/app.styl'
-createApp(App).use(ElementPlus).use(store).use(router).mount('#app')
-// 将el-icon的组件名称AbbbCddd转化为i-abbb-cddd形式
-// 此前用switch做组件名时因关键字重复报错，所以格式统一加了前缀
-// 例：Switch转换为i-switch，ArrowDownBold转换为i-arrow-down-bold
-// export function transElIconName(iconName){
-//     return 'i'+iconName.replace(/[A-Z]/g,(match)=>'-'+match.toLowerCase())}
+// createApp(App).use(ElementPlus).use(store).component(...iconName,item).use(router).mount('#app')

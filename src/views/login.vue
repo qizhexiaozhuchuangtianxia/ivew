@@ -1,19 +1,36 @@
-<template lang="pug">
-.login
-    .model
-        .box
-            h3 后台管理系统-欢迎登录
-            el-form(:model="ruleForm",:rules="rules",ref="ruleForm")
-                el-form-item(prop="userName")
-                    el-input(v-model="ruleForm.userName",placeholder="请输入用户名",clearable)
-                        template(slot="prepend")
-                            i.el-icon(:size="20",color="#409EFC" )
-                                user
-                
+<template>
+  <el-form
+  :model="ruleForm"
+  status-icon
+  :rules="rules"
+  ref="ruleForm"
+  label-width="100px"
+  class="demo-ruleForm"
+>
+  <el-form-item label="账号" prop="userName">
+    <el-input
+      v-model="ruleForm.userName"
+      autocomplete="off"
+    ></el-input>
+  </el-form-item>
+  <el-form-item label="密码" prop="password">
+    <el-input
+      type="password"
+      v-model="ruleForm.password"
+      autocomplete="off"
+
+    ></el-input>
+  </el-form-item>
+  <el-form-item>
+    <el-button type="primary" @click="submitForm('ruleForm')">提交</el-button>
+    <el-button @click="resetForm('ruleForm')">重置</el-button>
+  </el-form-item>
+</el-form>
 </template>
 
 <script>
     import md5 from 'js-md5'
+    import {filterAsyncRouter} from '../utils/router.js'
     import { mapGetters } from 'vuex'
     export default {
         components: {
@@ -30,47 +47,42 @@
                     password: [{ required: true, message: '请输入密码', trigger: 'blur' }],
                 },
                 // loading: false,
-                // getInfoes: {
-                //     userName: null,
-                //     loginIp: '192.168.2.45',
-                //     loginTime: Date.now(),
-                //     ipAddr: '亚洲'
-                // }
+                getInfoes: {
+                    userName: '333',
+                    loginIp: '',
+                    loginTime: Date.now(),
+                    ipAddr: ''
+                }
             }
         },
         mounted(){
+         this.filterAsyncRouter()
             // if(this.getInfo&&(/^\/login$/).test(this.$route.path)){
             //     this.$link('/home')
             // }
         },
-        // computed: {
-        //     ...mapGetters(['getInfo'])
-        // },
+        computed: {
+            ...mapGetters(['getInfo'])
+        },
         methods:{
-            asubmitForm(formName){
+            submitForm(formName){
+               
+               
                 this.$refs[formName].validate((valid) => {
                     if(valid){
-                        this.loading = true;
-                        this.ruleForm.password = md5(this.ruleForm.password);
-                        // 以下仅本地测试
-                        this.getInfoes.userName = this.ruleForm.userName;
-                        this.$setItem('getInfo', this.getInfoes);
-                        this.$store.commit('SET_GETINFO', this.getInfoes);
-                        this.loading = false;
-                        this.$link('/home');
-
-                        // 以下正式操作
+                        console.log(11111, this.rules.password[0].message);
+                        this.$nextTick(() => { this.rules.password[0].message= '222'})
+                       
                         // this.$store.dispatch('Login', this.ruleForm).then(res =>{
-                        //     if(res&&res.resCode == 1){
-                        //         this.$toast.center('登录成功');
-                        //         this.$store.dispatch('MenuList',{userId: res.resObj.userId}).then(res =>{})
-                        //         this.$link('/home')
+                        //     console.log(res,'resssss');
+                        //     if(res.code == 200){
+
                         //     }else{
-                        //         this.loading = false;
-                        //         return false;
+
                         //     }
-                        // }).catch(res =>{
-                        //     this.loading = false;
+                        // }).catch(error => {
+                        //     console.log(error,'error-----login');
+                        //     reject(error)
                         // })
                     }else{
                         this.loading = false;

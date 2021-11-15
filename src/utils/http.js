@@ -3,13 +3,13 @@ import store from '@js/store'
 import router from '@/router'
 import { setItem, getItem, remItem } from './com'
 import qs from 'qs'
-
 // 请求进度条
 import NProgress from 'nprogress';
 import 'nprogress/nprogress.css';
+import { ElMessage } from 'element-plus';
 
 const service = axios.create({
-    baseURL: WGURL.api,
+    baseURL: 'https://baidu.com',
     timeout: 50000
 });
 
@@ -23,7 +23,7 @@ service.interceptors.request.use(
         return config;
     },
     err => {
-        SandVS.$toast.center(err);
+        ElMessage.error(err)
         return Promise.reject(err);
     }
 );
@@ -43,7 +43,7 @@ service.interceptors.response.use(
                 res.data.msg != ""
             ){
                 // 错误统一提示语
-                SandVS.$toast.center(res.data.msg);
+                ElMessage.error(err)
             }
             NProgress.done()
             return res.data;
