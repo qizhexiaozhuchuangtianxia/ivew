@@ -1,5 +1,5 @@
 import axios from 'axios'
-import store from '@js/store'
+import store from '../store/index'
 import router from '@/router'
 import { setItem, getItem, remItem } from './com'
 import qs from 'qs'

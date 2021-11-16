@@ -134,19 +134,20 @@ module.exports = {
         };
     },
     devServer: {
-        host: "localhost",
         port: 8348,
         https: false,
         open: true,
         hotOnly: false,
+        host: '0.0.0.0',
+        proxy: null// 设置代理
         /* 使用代理 */
-        proxy: {
-            '/api': {
-                /* 目标代理服务器地址 */
-                target: 'https://www.baidu.com/',
-                /* 允许跨域 */
-                changeOrigin: false,
-            },
-        }
+        // proxy: {
+        //     '/api': {
+        //         /* 目标代理服务器地址 */
+        //         target: 'https://www.baidu.com/',
+        //         /* 允许跨域 */
+        //         changeOrigin: false,
+        //     },
+        // }
     }
 };

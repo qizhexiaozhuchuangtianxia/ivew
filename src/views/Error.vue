@@ -1,13 +1,13 @@
 <template>
-  <div class="home">
-   home
+  <div class="error">
+     404
   </div>
 </template>
 
 <script>
 
 export default {
-  name: 'home',
-  
+  name: 'error',
+ 
 }
 </script>
