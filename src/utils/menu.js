@@ -1,8 +1,10 @@
-import Home from '../views/Home.vue'
-import Task from '../components/task/task.vue'
-import User from '../components/user/user.vue'
-export const compoentMap = {
+import Home from '../pages/Home.vue'
+import ShopManage from '../views/shopManage'
+import UserManage from '../views/userManage'
+import BrandManage from '../views/brandManage'
+export default {
     home: Home,
-    task: Task,
-    user: User
+    userManage: UserManage ,
+    shopManage: ShopManage,
+    brandManage: BrandManage
 }

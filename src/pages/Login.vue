@@ -33,13 +33,72 @@
 <script>
 import md5 from "js-md5";
 import { mapGetters } from "vuex";
+import { ElMessage } from 'element-plus';
+// import { defineComponent, onMounted } from "vue";
+// export default defineComponent({
+//   name:'login',
+//   setup(props, root) {
+//    onMounted(()=>{
+//      // 如果已经登陆,再次输入login页面无效
+//     // if(root.getInfo&&(/^\/login$/).test(root.$route.path)){
+//     //     root.$link('/home')
+//     // }
+//    })
+//    return{
+//        ruleForm: {
+//         username: 1,
+//         password: 2,
+//       },
+//       rules: {
+//         username: [
+//           { required: true, message: "请输入用户名", trigger: "blur" },
+//         ],
+//         password: [{ required: true, message: "请输入密码", trigger: "blur" }],
+//       },
+//       loading: false,
+//       getInfoes: {
+//           username: null,
+//           loginIp: '',
+//           loginTime: Date.now(),
+//           ipAddr: ''
+//       }
+//    }
+//    computed(()=>{
+//       // ...mapGetters(['getInfo','userToken'])
+//    })
+//      asubmitForm(formName) {
+//       root.$refs[formName].validate((valid) => {
+//         if (valid) {
+//           root.loading = true;
+//           root.ruleForm.password = md5(root.ruleForm.password);
+//           // 以下正式操作
+//           root.$store.dispatch('Login', root.ruleForm).then(res=>{
+//               console.log(res,'resssss');
+//               if(res.code == 200){
+                
+//               }else{
+//                 root.loading = false;
+//               }
+//           }).catch(error => {
+//                  root.loading = false;
+//               console.log(error,'error-----login');
+//               reject(error)
+//           })
+//         } else {
+//           root.loading = false;
+//           return false;
+//         }
+//       });
+//     }
+//   },
+// });
 export default {
   components: {},
   data() {
     return {
       ruleForm: {
-        username: null,
-        password: null,
+        username: 'admin',
+        password: 2,
       },
       rules: {
         username: [
@@ -73,19 +132,23 @@ export default {
     asubmitForm(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
+          console.log(this.ruleForm);
           this.loading = true;
-          this.ruleForm.password = md5(this.ruleForm.password);
+          // TODO
+          // this.ruleForm.password = md5(12);
+          // this.ruleForm.password = md5(this.ruleForm.password);
           // 以下正式操作
           this.$store.dispatch('Login', this.ruleForm).then(res=>{
               console.log(res,'resssss');
               if(res.code == 200){
-                
+                 this.$router.push({path:"/Layout"});
               }else{
-                this.loading = false;
+                  ElMessage.error(res.message)
               }
+
+                this.loading = false;
           }).catch(error => {
                  this.loading = false;
-              console.log(error,'error-----login');
               reject(error)
           })
         } else {

@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import router from '@/router'
-import request from './http'
 
 // 时间戳转换
 export const formatDate = ((value) => {
@@ -68,27 +67,5 @@ export const remItem = ((key) =>{
         localStorage.removeItem(key);
     }else{
         localStorage.clear();
-    }
-})
-
-// get
-export const get = ((url, param) =>{
-    if(param){
-        let nd="?";
-        let xx = Object.entries(param);
-        xx.forEach((val) => {
-            if(val[1] || val[1] == 0){
-                nd+=val[0]+'='+val[1]+'&'
-            }
-        });
-        url = url+nd.replace(/&$/,'');
-    }
-    return request({url: url, method: 'get'})
-})
-
-// post
-export const post = ((url, param) =>{
-    if(param){
-        return request({url: url, method: 'post',data: param})
     }
 })

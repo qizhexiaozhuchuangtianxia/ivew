@@ -17,6 +17,15 @@ export const menuList = {
         }
       }],
      '2':[
+      {
+        "path": "/shopManage",
+        "component": "shopManage",
+        "index":'3', 
+        "meta": {
+          "title": "门店管理",
+          "icon": "Menu",
+        }
+      },
        {
         "path": "/brandManage",
         "component": "brandManage",
@@ -38,18 +47,10 @@ export const menuList = {
           "icon": "Menu",
         }
       },
-      {
-        "path": "/shopManage",
-        "component": "shopManage",
-        "index":'3', 
-        "meta": {
-          "title": "门店管理",
-          "icon": "Menu",
-        }
-      }
+      
     ]
 
-  }
+}
 
 
   // {

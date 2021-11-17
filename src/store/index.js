@@ -1,9 +1,10 @@
+
 import Vuex from 'vuex'
 import router from '@/router'
 import { setItem, getItem, remItem } from '../utils/com'
-import { menuLists } from '../utils/menuJson'
+import  {menuList} from '../utils/menuJson'
 import * as api from "../api/index.js";
-
+console.log(menuList,'11111menuLists');
 const store = new Vuex.Store({
   state: {
     getInfo: getItem('getInfo') ? getItem('getInfo') : null,
@@ -37,6 +38,7 @@ const store = new Vuex.Store({
   actions: {
     // 账户登录
     Login({ commit }, userInfo) {
+      console.log('login-vuex');
       return new Promise((resolve, reject) => {
         return api.userInfoRequest.login(userInfo).then((res) => {
           // commit("SET_USER_TOKEN", 'token-vuex')
@@ -66,8 +68,8 @@ const store = new Vuex.Store({
       })
     },
     getRouter({ commit }) {
-      console.log(menuLists,'menuLists');
-      commit('SET_MENULIST', [])
+      console.log(menuList,'menuLists');
+      commit('SET_MENULIST', menuList[2])
     }
   }
 })

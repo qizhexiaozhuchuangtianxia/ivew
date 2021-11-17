@@ -17,11 +17,11 @@ export const userInfoRequest = {
         })
     },
 
-    signOut(data) {
-        return api.getRequest('/xmtzx/v1.0/app/anchor/get','http://tjksh.weoathome.com' , data).then((response) => {
-            return response.data
-        })
-    },
+    // login(data) {
+    //     return api.getRequest('/xmtzx/v1.0/app/ancho1r/get','http://tjksh.weoathome.com' , data).then((response) => {
+    //         return response.data
+    //     })
+    // },
     userInfo(data) {
         return api.getRequest('/xmtzx/v1.0/app/anchor/get','http://tjksh.weoathome.com' , data).then((response) => {
             return response.data

@@ -1,11 +1,11 @@
-import { createRouter, createWebHistory } from 'vue-router'
-import Home from '../views/Home.vue'
-import Login from '../views/Login.vue'
-import Layout from '../views/Layout.vue'
-import Error from '../views/Error.vue'
-import Task from '../components/task/task.vue'
+import { createRouter, createWebHashHistory } from 'vue-router'
+import Login from '../pages/Login.vue'
+import Layout from '../pages/Layout.vue'
+import Error from '../pages/Error.vue'
 import {filterAsyncRouter} from '../utils/router.js'
-
+import ShopManage from '../views/shopManage'
+import UserManage from '../views/userManage'
+import BrandManage from '../views/brandManage'
 const routes = [
   {
     path: '/',
@@ -27,13 +27,27 @@ const routes = [
     name: 'layout',
     component: Layout,
     children: [
+      {
+        path: '/shopManage',
+        name: 'shopManage',
+        component: ShopManage
+      }, {
+        path: '/userManage',
+        name: 'userManage',
+        component: UserManage
+      }, {
+        path: '/brandManage',
+        name: 'brandManage',
+        component: BrandManage
+      },
         // {path: '/home',name: '首页',component:Home},
     ]
   },
 ]
 
 const router = createRouter({
-  history: createWebHistory(process.env.BASE_URL),
+  history: createWebHashHistory(process.env.BASE_URL),
+  // history: 'hash',
   routes
 })
 

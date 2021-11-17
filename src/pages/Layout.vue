@@ -16,14 +16,14 @@
       <div class="menu">
         <el-menu
           class="el-menu-vertical-demo"
-          default-active="1"
+          default-active="3"
           text-color="#5e6d82"
            active-text-color="#32AF93"
            active-background-color	="#ededed"
           @open="handleOpen"
           @close="handleClose"
         >
-        <template v-for="item in menuList" :key="item.index" >
+        <template v-for="(item,index) in menuList" :key="index" >
           <!-- el-sub-menu 有children -->
           <el-sub-menu v-if="item.children" >
               <template #title :index="item.index">
@@ -35,7 +35,7 @@
             </el-menu-item-group>
           </el-sub-menu>
             <!-- el-menu-item 有children -->
-          <el-menu-item  v-if="!item.children" :index="item.index">
+          <el-menu-item  v-if="!item.children" :index="item.index" @click="onClickMenu(item)">
              <template #title :index="item.index">
             <el-icon><component :is="item.meta.icon" /> </el-icon>
               <span>{{ item.meta.title }}</span>
@@ -64,7 +64,7 @@
         </el-tabs>
       </div>
       <div class="view-con">
-        <router-view></router-view>
+        <router-view/>
         <transition name="display"></transition>
       </div>
     </div>
@@ -75,16 +75,18 @@
 import { defineComponent, ref, onMounted, computed } from "vue";
 import {useStore} from 'vuex'
 import { useRouter } from 'vue-router';
-import * as menuCompoent from "../utils/menu.js"
-import Home from '../views/Home.vue'
-import Task from '../components/task/task.vue'
-import User from '../components/user/user.vue'
+// import * as compoentMap from "../utils/menu.js"
+import ShopManage from '../views/shopManage'
+import UserManage from '../views/userManage'
+import BrandManage from '../views/brandManage'
 const compoentMap = {
-   home: Home,
-    task: Task,
-    user: User
+    userManage: UserManage ,
+    shopManage: ShopManage,
+    brandManage: BrandManage
 }
+
 export default defineComponent({
+  name:'layout',
   setup(props, root) {
     const isCollapse = ref(false);
     const handleOpen = (key, keyPath) => {
@@ -100,11 +102,19 @@ export default defineComponent({
       console.log(11);
         store.dispatch('getRouter');
     })
+    // if(list){
+      //   console.log( store.state.menuList ,' store.state.menuList ');
+    //   router.push(store.state.menuList[0].path);
+    // }
+    // TODO 默认第一次进入
+    // TODO 刷新路由空白页面
     const menuList = computed(() => {
-        const list = store.state.menuList 
+      const list = store.state.menuList 
         if(list){
-          list.forEach(item => {
-              router.addRoute('layout', { path: item.path, component: compoentMap[item.component] })
+          
+          list.forEach((item,index) => {
+            router.addRoute('layout', { path: item.path, component: compoentMap[item.component] })
+             
           })
         }
         return list;
@@ -113,76 +123,14 @@ export default defineComponent({
    
 
     const onClickMenu = (item) => {
+      console.log(item,'items');
         router.push(item.path);
     }
-    // if(!localStorage.getItem('tabList')){
-    //     this.tabList = [{
-    //     title: this.$route.name,
-    //     name: this.$route.path.substring(1,this.$route.path.length)
-    // }]
-    // this.$setItem('tabList',this.tabList);
-    // }
+
     return {
       isCollapse,
       handleOpen,
       handleClose,
-      //   tabList: this.$getItem("tabList") ? this.$getItem("tabList") : [],
-      //   tabList: [],
-      menuLists: [
-        {
-          index: "home",
-          title: "首页",
-          path: "home",
-        },
-        {
-          index: "table",
-          title: "表格",
-          child: [
-            {
-              index: "table/table1",
-              title: "表格1",
-              path: "table/table1",
-            },
-            {
-              index: "table/table2",
-              title: "表格2",
-              path: "table/table2",
-            },
-          ],
-        },
-        {
-          index: "form",
-          title: "表单",
-          child: [
-            {
-              index: "form/form1",
-              title: "表单1",
-              path: "form/form1",
-            },
-            {
-              index: "form/form2",
-              title: "表单2",
-              path: "form/form2",
-            },
-          ],
-        },
-        {
-          index: "grop",
-          title: "表组",
-          child: [
-            {
-              index: "grop/grop1",
-              title: "表组1",
-              path: "grop/grop1",
-            },
-            {
-              index: "grop/grop2",
-              title: "表组2",
-              path: "grop/grop2",
-            },
-          ],
-        }
-      ],
       menuList,
       onClickMenu
     };
